@@ -655,3 +655,12 @@ import time
 cronometro = time.time() # começa a contar o tempo a apartir daqui
 tempoFinal = time.time() # mede o tempo desde o último time.time()
 total = cronometro - tempoFinal # tempo percorrido
+
+import pygame
+pygame.init() # recursos básicos pra rodar o pacote
+window = pygame.display.set_mode(size=(720,480)) # tamanho da janela
+while True: # pra manter a janela aberta
+    for event in pygame.event.get(): # vê todos os eventos que estão acontecendo
+        if event.type == pygame.QUIT: # se o evento for o de clicar no X
+            pygame.quit() # é fecha a janela
+            quit() # fecha o pygame.init()
