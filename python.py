@@ -167,7 +167,32 @@ class Planta():
     def especie():
         print('espécie desconhecida')
 Planta.especie() # uso de um método estático
-
+class Texto:
+    def __init__(self,paragrafos,linhas):
+        self._paragrafos = paragrafos # semi privado (funciona normal)
+        self.__linhas = linhas # privado, não pode ser chamado diretamente
+caderno = Texto(3,18)
+print(caderno._paragrafos) # funciona
+print(caderno.__linhas) # erro
+#dunder--------------------------------------------------------------------------------------
+object.__class__ # diz a classe que um objeto faz parte
+object.__class__.__name__ # diz a classe com nome mais legível
+class dunder():
+    def __init__(self):# definir atributos de uma instância
+        pass
+    def __str__(self): # quando o objeto for tratado como str ou usado no print
+        return str
+    def __repr__(self): # só é usado se a instância for acessada com repr(instância)
+        return str
+    def __len__(self): # o que acontece quando usa len()
+        return int
+    def __add__(self,algo): # quando soma a instância + algo
+        return str|int
+    def __getitem__(self,index): # quando for iterado
+        return self.list[index]
+    def __call__(self,arg): # faz a instância ser tratada como função, os argumentos aqui são os usados na chamada
+        pass
+print(__file__) # mostra caminho pro arquivo atual
 #funções---------------------------------------------------------------------------------------------------------------------
 print('',end='') # Escreve algo no CLI                                                            (object) -> None
 sum() # soma os valores de um iteravel e uma constante                                            (iteravel,num) -> num
@@ -197,25 +222,6 @@ globals()['nome'] = 'algo' # cria uma variável com esse nome e esse valor
 eval('expressãoQualquer') # executa uma str como comando
 globals() # dicionário com o par nomedavariável:valor , com escopo global
 locals() # dicionário com o par nomedavariável:valor , com valores do escopo atual
-#dunder--------------------------------------------------------------------------------------
-object.__class__ # diz a classe que um objeto faz parte
-
-class dunder():
-    def __init__(self):# definir atributos de uma instância
-        pass
-    def __str__(self): # quando o objeto for tratado como str ou usado no print
-        return str
-    def __repr__(self): # só é usado se a instância for acessada com repr(instância)
-        return str
-    def __len__(self): # o que acontece quando usa len()
-        return int
-    def __add__(self,algo): # quando soma a instância + algo
-        return str|int
-    def __getitem__(self,index): # quando for iterado
-        return self.list[index]
-    def __call__(self,arg): # faz a instância ser tratada como função, os argumentos aqui são os usados na chamada
-        pass
-print(__file__) # mostra caminho pro arquivo atual
 #métodos--------------------------------------------------------------------------------------------------------------------
 list.append() # adiciona um objeto no final da lista                                              (list) -> None
 list.remove() # remove o primeiro elemento com esse valor                                         (list) -> None
