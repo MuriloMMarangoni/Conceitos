@@ -175,6 +175,22 @@ class Texto:
 caderno = Texto(3,18)
 print(caderno._paragrafos) # funciona
 print(caderno.__linhas) # erro
+# Design Pattern: Factory (classe que cria objetos de outra classe)
+class Produto:
+    def __init__(self,nome:str,preco:int):
+        self.nome = nome
+        self.preco = preco
+class Factory:
+    @staticmethod # NÃO USA SELF
+    def criar(nome:str,preco:int):
+        return Produto(nome=nome,preco=preco)
+    
+primeiro = Factory.criar('cebola',1)
+
+l = []
+for each in range(1,11):
+    l.append(Factory.criar(f'{each}',each))
+print(l)
 #dunder--------------------------------------------------------------------------------------
 object.__class__ # diz a classe que um objeto faz parte
 object.__class__.__name__ # diz a classe com nome mais legível
@@ -664,6 +680,24 @@ import time
 cronometro = time.time() # começa a contar o tempo a apartir daqui
 tempoFinal = time.time() # mede o tempo desde o último time.time()
 total = cronometro - tempoFinal # tempo percorrido
+
+from abc import ABC, abstractmethod # classe e métodos abstratos
+
+class Abstrata(ABC): # não pode ser instânciada, só herdada
+
+    @abstractmethod # toda classe herdeira DEVE ter uma cópia aplicada de cada método abstrato
+    def metodoabstrato(self):
+        print('Esse método deve ser implementado na classe herdeira')
+    @abstractmethod
+    def metodoabstrato2(self):
+        print('Esse método também deve ser implementado na classe herdeira')
+class Real(Abstrata):
+    def metodoabstrato(self):
+        print('Usando a classe abstrata como base pra classe real')
+    def metodoabstrato2(self):
+        print('Todos os métodos abstratos precisam ser implementados')
+r = Real().metodoabstrato() # a classe abstrata não pode ser usada aqui, só a real
+rr = Real().metodoabstrato2()
 
 import pygame # módulo pra jogos
 COLOR_ORANGE =(255,128,0)
