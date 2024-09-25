@@ -9,6 +9,7 @@ lista = [1,2,3]
 tupla = (1,2,3)
 conjunto = {1,2,3}
 dicionario = {"1":2}
+CONSTANTE = 1
 file = open("arquivo.txt",'a')
 vetor = np.array([])
 matriz = np.array([],[],[])
@@ -351,8 +352,10 @@ assert a == 'xx' # o código da erro se for False
 #await
 
 #Funções dos módulos---------------------------------------------------------------------------------------------------------
-from arquivo import funcao # importa uma função de um módulo customizado
-
+from bibliotecapy import modulo # importa um módulo de uma biblioteca
+from bibliotecapy.modulo import funcaoDoModulo # importa uma função de um módulo de uma biblioteca
+from bibliotecapy.modulo import ClasseDoModulo # importa uma classe
+from bibliotecapy.modulo import CONSTANTEDOMODULO # importa uma variável
 import this # zen do python
 
 import random
@@ -702,3 +705,6 @@ while True:                                       # fica o tempo todo verificand
         if event.type == pygame.QUIT:             # se clicar no X
             pygame.quit()                         # fecha a janela
             quit()                                # fecha o pygame.init()
+
+available_fonts = pygame.font.get_fonts()         # fontes disponíveis
+print(available_fonts)
