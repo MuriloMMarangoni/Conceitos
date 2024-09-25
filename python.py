@@ -662,11 +662,43 @@ cronometro = time.time() # começa a contar o tempo a apartir daqui
 tempoFinal = time.time() # mede o tempo desde o último time.time()
 total = cronometro - tempoFinal # tempo percorrido
 
-import pygame
-pygame.init() # recursos básicos pra rodar o pacote
-window = pygame.display.set_mode(size=(720,480)) # tamanho da janela
-while True: # pra manter a janela aberta
-    for event in pygame.event.get(): # vê todos os eventos que estão acontecendo
-        if event.type == pygame.QUIT: # se o evento for o de clicar no X
-            pygame.quit() # é fecha a janela
-            quit() # fecha o pygame.init()
+import pygame # módulo pra jogos
+COLOR_ORANGE =(255,128,0)
+COLOR_YELLOW =(255,255,128)
+COLOR_WHITE = (255,255,255)
+MENU_OPTION = (
+    'Primeira Opção',
+    'Segunda Opção',
+    'Terceira Opção',
+    'Quarta Opção',
+    'Quinta Opção'
+)
+WIN_WIDTH = 576
+WIN_HEIGHT = 324
+
+def menu_text(text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+    #tamanho,texto,cor(r,g,b),posição(x,y)
+    text_font = pygame.font.SysFont(name="Free Serif", size=text_size) # fonte 
+    text_surf = text_font.render(text, True, text_color).convert_alpha() # transforma str em texto na tela
+    text_rect = text_surf.get_rect(center=text_center_pos) # posiciona o texto
+    window.blit(source=text_surf, dest=text_rect) # aplica os textos
+
+pygame.init()                                     # recursos básicos pra rodar o pacote
+window = pygame.display.set_mode(size=(WIN_WIDTH,WIN_HEIGHT))  # exibe a janela nesse tamanho
+surf = pygame.image.load('./asset/MenuBg.png')    # seleciona a imagem de fundo
+rect = surf.get_rect(left=0,top=0)                # qual parte da tela a imagem vai ficar
+pygame.mixer_music.load('./asset/Menu.mp3')       # escolhe a música
+pygame.mixer_music.play(-1)                       # toca a música pra sempre
+
+while True:                                       # fica o tempo todo verificando
+    
+    window.blit(source=surf,dest=rect)            # aplica a imagem nas coordenadas do rect
+    menu_text(50, "Tela", COLOR_ORANGE, ((WIN_WIDTH / 2), 70)) # texto
+    for i in range(len(MENU_OPTION)):
+        menu_text(20, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 200 + 25 * i)) # textos da tupla
+    
+    pygame.display.flip()                         # mostra as mudanças na tela
+    for event in pygame.event.get():              # vê todos os eventos que estão acontecendo
+        if event.type == pygame.QUIT:             # se clicar no X
+            pygame.quit()                         # fecha a janela
+            quit()                                # fecha o pygame.init()
