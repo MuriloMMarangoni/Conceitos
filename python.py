@@ -737,7 +737,7 @@ while window:                       # em loops infinitos, capture eventos e use 
             if event.key == pygame.K_a: pass# checa as teclas, se for 'a'
             if event.key == pygame.K_RETURN: pass        # tecla enter
             if event.key == pygame.K_0: pass             # tecla 0
-        if event.type == pygame.VIDEORESIZE: pass # se clicar no quadrado de resolução
+        if event.type == pygame.VIDEORESIZE: pass # se o tamanho da janela mudar
     pygame.time.Clock().tick(60) # deixa o jogo a tantos Hz
 available_fonts = pygame.font.get_fonts()         # lista de fontes disponíveis do sistema operacional
 print(available_fonts)
