@@ -699,46 +699,45 @@ class Real(Abstrata):
 r = Real().metodoabstrato() # a classe abstrata não pode ser usada aqui, só a real
 rr = Real().metodoabstrato2()
 
-import pygame # módulo pra jogos
-COLOR_ORANGE =(255,128,0)
-COLOR_YELLOW =(255,255,128)
-COLOR_WHITE = (255,255,255)
-MENU_OPTION = (
-    'Primeira Opção',
-    'Segunda Opção',
-    'Terceira Opção',
-    'Quarta Opção',
-    'Quinta Opção'
-)
-WIN_WIDTH = 576
-WIN_HEIGHT = 324
-
-def menu_text(text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-    #tamanho,texto,cor(r,g,b),posição(x,y)
-    text_font = pygame.font.SysFont(name="Free Serif", size=text_size) # fonte 
-    text_surf = text_font.render(text, True, text_color).convert_alpha() # transforma str em texto na tela
-    text_rect = text_surf.get_rect(center=text_center_pos) # posiciona o texto
-    window.blit(source=text_surf, dest=text_rect) # aplica os textos
-
-pygame.init()                                     # recursos básicos pra rodar o pacote
-window = pygame.display.set_mode(size=(WIN_WIDTH,WIN_HEIGHT))  # exibe a janela nesse tamanho
-surf = pygame.image.load('./asset/MenuBg.png')    # seleciona a imagem de fundo
-rect = surf.get_rect(left=0,top=0)                # qual parte da tela a imagem vai ficar
-pygame.mixer_music.load('./asset/Menu.mp3')       # escolhe a música
-pygame.mixer_music.play(-1)                       # toca a música pra sempre
-
-while True:                                       # fica o tempo todo verificando
-    
-    window.blit(source=surf,dest=rect)            # aplica a imagem nas coordenadas do rect
-    menu_text(50, "Tela", COLOR_ORANGE, ((WIN_WIDTH / 2), 70)) # texto
-    for i in range(len(MENU_OPTION)):
-        menu_text(20, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 200 + 25 * i)) # textos da tupla
-    
-    pygame.display.flip()                         # mostra as mudanças na tela
-    for event in pygame.event.get():              # vê todos os eventos que estão acontecendo
-        if event.type == pygame.QUIT:             # se clicar no X
-            pygame.quit()                         # fecha a janela
-            quit()                                # fecha o pygame.init()
-
-available_fonts = pygame.font.get_fonts()         # fontes disponíveis
+import pygame # módulo de jogos
+pygame.init()                                    # inicia a janela
+window = pygame.display.set_mode((578,324),pygame.RESIZABLE) # tamanho da janela; quadrado de trocar de resolução
+pygame.display.set_caption("Nome da Janela") # nome da janela
+pygame.mixer_music.load('') # escolha o audio
+pygame.mixer_music.play(-1) # toque o audio
+#Image
+surf_img = pygame.image.load('caminhodaimagem').convert_alpha()# carrega a imagem, transforma em surface = área do desenho
+rect_img = surf_img.get_rect(left=0,top=0)# rectangle = posição que o surf fica(topo esquerdo)
+window.blit(source=surf_img,dest=rect_img)               # aplica surface e rectangle na tela
+pygame.display.flip()                            # atualiza a janela com todas as modificações feitas do blit
+#Text
+tamanho = 20 # elementos básicos de um texto
+fonte = 'Lucida Sans Typewriter'
+texto = 'texto'
+cor = (255,255,255)
+posicao = (576/2 , 200)
+fonteAplicada  = pygame.font.SysFont(name=fonte, size=tamanho) # cria uma fonte pro texto
+surf_txt  = fonteAplicada.render(texto, True, cor).convert_alpha() # aplica a cor ao texto e transforma em surface; suporte pra fundo transparente
+rect_txt  = surf_txt.get_rect(center=posicao)   # o centro do texto fica na posição                  
+window.blit(source=surf_txt, dest=rect_txt)
+window.fill((0,0,0)) # preenche a janela inteira com essa cor
+pygame.display.flip()
+#
+rect_txt.centerx # centro horizontal do rect
+rect_txt.left    # esqurda do rect
+rect_txt.right   # parte direita do rect
+rect_txt.x       # coordenada do rect na tela
+rect_txt.y       # coordenada do rect na tela
+while window:                       # em loops infinitos, capture eventos e use blit e flip apenas
+    for event in pygame.event.get():# checa os eventos
+        if event.type == pygame.QUIT:# tipos de eventos, se clicar no X da tela
+            pygame.quit()            # fechar janela
+            quit()                   # encerrar pygame
+        if event.type == pygame.KEYDOWN: # se apertar tecla
+            if event.key == pygame.K_a: pass# checa as teclas, se for 'a'
+            if event.key == pygame.K_RETURN: pass        # tecla enter
+            if event.key == pygame.K_0: pass             # tecla 0
+        if event.type == pygame.VIDEORESIZE: pass # se clicar no quadrado de resolução
+    pygame.time.Clock().tick(60) # deixa o jogo a tantos Hz
+available_fonts = pygame.font.get_fonts()         # lista de fontes disponíveis do sistema operacional
 print(available_fonts)
