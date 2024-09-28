@@ -699,6 +699,42 @@ class Real(Abstrata):
 r = Real().metodoabstrato() # a classe abstrata não pode ser usada aqui, só a real
 rr = Real().metodoabstrato2()
 
+import sched # agendar eventos
+import time
+def evento_agendado(agendador,intervalo,mensagem):
+    agendador.enter( # vai chamar uma função com parâmetros a cada tantos segundos
+                    intervalo, # tempo entre chamadas
+                    1, # prioridade
+                    evento_agendado, # chama a função
+                    (agendador,intervalo,mensagem)) # com esses argumentos
+    print(mensagem) # o que a função vai fazer
+agendador = sched.scheduler(time.time,time.sleep) # cria o agendador
+evento_agendado(agendador,1,'Essa mensagem é mostrada a cada 1s')
+agendador.run() # roda
+import smtplib # enviar e-mail
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+email_login = "seu@gmail.com"  # Seu endereço de e-mail
+email_password = "tem16digitos"  # Senha de app (tem na conta do google)
+email_para = "emaildestino@gmail.com"
+titulo = f"titulo do email"
+conteudo = f"texto do email"
+mensagem = MIMEMultipart() # estrutura do e-mail
+mensagem["From"] = email_login
+mensagem["To"] = email_para
+mensagem["Subject"] = titulo
+mensagem.attach(MIMEText(conteudo, "plain"))
+try:
+    server = smtplib.SMTP("smtp.gmail.com", 587) # fazer login e enviar o e-mail
+    server.starttls()  
+    server.login(email_login, email_password)
+    server.sendmail(email_login, email_para, mensagem.as_string())
+except Exception as e:
+    print(f"Erro ao enviar o e-mail: {e}") # mostra o erro
+else:
+    print("E-mail enviado com sucesso!")
+finally:
+    server.quit() # encerra conexão
 import pygame # módulo de jogos
 pygame.init()                                    # inicia a janela
 window = pygame.display.set_mode((578,324),pygame.RESIZABLE) # tamanho da janela; quadrado de trocar de resolução
@@ -737,6 +773,8 @@ while window:                       # em loops infinitos, capture eventos e use 
             if event.key == pygame.K_a: pass# checa as teclas, se for 'a'
             if event.key == pygame.K_RETURN: pass        # tecla enter
             if event.key == pygame.K_0: pass             # tecla 0
+        if event.type == pygame.KEYUP: # se soltar a tecla
+            print(nome_das_teclas := pygame.key.name(event.key)) # diz o nome da tecla apertada
         if event.type == pygame.VIDEORESIZE: pass # se o tamanho da janela mudar
     pygame.time.Clock().tick(60) # deixa o jogo a tantos Hz
 available_fonts = pygame.font.get_fonts()         # lista de fontes disponíveis do sistema operacional
