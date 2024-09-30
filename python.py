@@ -297,6 +297,7 @@ StopIteration # quando você tenta acessar um iterador exausto
 json.JSONDecodeError # quando você lê um arquivo json vazio
 AssertionError # quando assert é falso
 KeyboardInterrupt # quando usar algum comando pro sistema sair
+SystemExit # Erro que encerra o programa na hora
 #keywords--------------------------------------------------------------------------------------------------------------------
 from math import sin as sen #from módulo import função sin, mas escreva como sen
 sen() == math.sin()
@@ -378,9 +379,6 @@ import random
 random.randint(1,10) # escolhe um número ente esse período
 random.choice(l) # escolhe um elemento aleatório
 random.shuffle(l) # organiza aleatoriamente uma sequência
-
-import time
-time.sleep(1)
 
 import os
 os.remove('arquivo')#apaga um arquivo
@@ -540,6 +538,7 @@ menu.mainloop() # janela aberta
 
 import sys #---------------------------------------------------------
 sys.getsizeof(object) # diz o espaço em bytes que algo ocupa
+sys.exit() # encerra o programa
 
 import cProfile #--------------------------------------------------
 cProfile.run('anonima(1,2)') # roda uma função com parâmetros especificados e diz o tempo de execução
@@ -677,6 +676,7 @@ fila.popleft() # remove no começo
 listaBase = list(fila) # converte queue pra lista
 
 import time
+time.sleep(1) # espera tantos segundos pra executar um código
 cronometro = time.time() # começa a contar o tempo a apartir daqui
 tempoFinal = time.time() # mede o tempo desde o último time.time()
 total = cronometro - tempoFinal # tempo percorrido
@@ -735,6 +735,29 @@ else:
     print("E-mail enviado com sucesso!")
 finally:
     server.quit() # encerra conexão
+import sqlite3 # banco de dados
+conectar = sqlite3.connect('banco.db') # criar ou conectar
+cursor = conectar.cursor()             # interagir com o banco
+cursor.execute('''CREATE TABLE IF NOT EXISTS planta (
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               nome TEXT,
+               price REAL
+               )''')                     # comando SQL de criação de tabela
+dados_do_banco = [ 
+    ('Orquídea',3.4),
+    ('Samambaia',6.5),
+    ('Rosa',2.3)
+]                                       # dados pra inserir
+for dado in dados_do_banco:
+    cursor.execute("INSERT INTO planta"
+                   "(nome,price)"
+                   "VALUES (?,?)",dado) # comando sql de inserção dos dados
+cursor.execute('SELECT * FROM planta') # comando sql de selecionar
+linhas = cursor.fetchall() # pega todas as linhas do arquivo.db
+for linha in linhas:
+    print(f"ID:{linha[0]},Nome:{linha[1]},Price:{linha[2]}")
+conectar.commit()                       # enviar
+conectar.close()                        # terminar conexão
 import pygame # módulo de jogos
 pygame.init()                                    # inicia a janela
 window = pygame.display.set_mode((578,324),pygame.RESIZABLE) # tamanho da janela; quadrado de trocar de resolução
