@@ -373,14 +373,15 @@ from bibliotecapy import modulo # importa um módulo de uma biblioteca
 from bibliotecapy.modulo import funcaoDoModulo # importa uma função de um módulo de uma biblioteca
 from bibliotecapy.modulo import ClasseDoModulo # importa uma classe
 from bibliotecapy.modulo import CONSTANTEDOMODULO # importa uma variável
-import this # zen do python
 
 import random
+
 random.randint(1,10) # escolhe um número ente esse período
 random.choice(l) # escolhe um elemento aleatório
 random.shuffle(l) # organiza aleatoriamente uma sequência
 
 import os
+
 os.remove('arquivo')#apaga um arquivo
 os.rename('nome anterior','nome novo')#renomeia um arquivo
 string = os.getcwd() #diretório atual
@@ -391,6 +392,7 @@ os.system('comandos bash') # executa comandos bash
 os.mkdir('pasta') # cria uma pasta
 
 import math
+
 math.ceil() # arredonda pra cima                                                                            (num) -> num
 math.floor() # arredonda pra baixo                                                                          (num) -> num
 math.dist() # distância entre dois pontos                                                                   (num) -> num
@@ -410,6 +412,7 @@ math.cos() # cosseno em radianos
 math.tan() # tangente em radianos
 
 import numpy as np
+
 produto_escalar = np.inner(matriz,matriz) #produto escalar de duas matrizes
 multiplicacao = np.matmul(matriz,matriz) # multiplicação de matrizes
 amostra =  np.random.normal(10,3,20) # distribuição normal pra um Histograma(centro,desvio padrão,quantidade)
@@ -451,6 +454,7 @@ equacao = 2*x+1 # forma da equação
 resolucao = sp.solve(equacao) # resolver ela = 0
 
 import matplotlib.pyplot as plt
+
 fonte = {'family':'serif','color':'red','size':12}
 x0 = 1
 xf = 3
@@ -494,11 +498,13 @@ plt.savefig('arquivo.png') # baixa uma print do gráfico
 plt.show() # abre a tela com o gráfico
 
 from scipy.interpolate import *
+
 pontox = [1,2,3,4]
 pontoy = [5,6,7,8]
 interpolacao = lagrange(pontox,pontoy) # função que passa pelos pontos (pontox[n],pontoy[n])
 
 import pandas as pd
+
 media = vetorpd.mean() # media de um vetor
 moda = vetorpd.mode().iloc[0] # moda de um vetor, com suporte a excessões
 mediana = vetorpd.median() # mediana de um vetor
@@ -506,6 +512,7 @@ variancia = vetorpd.var() # variância de um vetor
 desvio_padrao = vetorpd.std() # desvio padrão de um vetor
 
 from tkinter import * #----------------------------------------------
+
 menu = Tk() # janela nova
 menu.title("Janela") # nome da janela
 altura = 300 # altura da janela
@@ -537,13 +544,16 @@ texto.pack() # exibe o texto
 menu.mainloop() # janela aberta
 
 import sys #---------------------------------------------------------
+
 sys.getsizeof(object) # diz o espaço em bytes que algo ocupa
 sys.exit() # encerra o programa
 
 import cProfile #--------------------------------------------------
+
 cProfile.run('anonima(1,2)') # roda uma função com parâmetros especificados e diz o tempo de execução
 
 import subprocess #-----------------------------------------------
+
 subprocess.run('ls',shell=True) # roda um comando bash, pausa o script até terminar a execução
 out = subprocess.run('ls',shell=True,text=True,capture_output=True) # pega a saída de um comando ao invés de mostrar no terminal
 subprocess.run('mkdir teste',shell=True,stdout=subprocess.DEVNULL) # não mostra a saída do comando
@@ -553,8 +563,10 @@ p = subprocess.Popen('sleep 5',shell=True,cwd='caminhoQueVaiRodarESSEComando') #
 p = subprocess.Popen('pwd',shell=True,stdout=subprocess.PIPE,text=True) # pega a saída de um Popen
 saida = p.communicate() # tupla com a saída e o erro, usar saida[0] pra pegar a saída
 p.wait() # Espera que o comando seja executado pra continuar o script (só com Popen)
+subprocess.run('pyinstaller arquivo.py',shell=True) # cria um executável de um arquivo.py
 
 from fpdf import FPDF #Pdfs------------------------------------------------------------------
+
 class PDF(FPDF): # Coloca métodos além dos da FPDF que se repetem pra ter menos boilerplate
     def header(self): # Cabeçalho
         self.set_font('Arial', 'B', 12) # Fonte(Família, Estilo, Tamanho)
@@ -600,6 +612,7 @@ pdf.image(name="caminho completo",x=60,y=120,w=120) # coloca uma imagem (posiç�
 pdf.output('out.pdf') # Cria arquivo ou sobrescreve
 
 import qrcode # gera um qrcode de uma string
+
 qr = qrcode.QRCode(
     version=1, # quantidade de dados (1-40)
     error_correction=qrcode.constants.ERROR_CORRECT_L, #(correção de erros (L M Q H))
@@ -613,10 +626,12 @@ img.save("qrcode.png") # gera a imagem
 
 from barcode import Code128 # gera um código de barras
 from barcode.writer import ImageWriter
+
 codigo = Code128("algo", writer=ImageWriter()) # faz no formato code128 um texto
 filename = codigo.save("codigo_de_barras") # gera a imagem
 
 from datetime import datetime # opera com datas
+
 base = datetime.now() # dia e hora
 hora = base.strftime("%H:%M:%S") # hora
 dia = base.date() # data
@@ -625,16 +640,19 @@ dia_semana = datetime.now().weekday() # dia da semana segunda -> 0 domingo -> 6
 data = datetime(2024,8,15,20,56) # horas manuais (com restrições)
 
 import pytz # fuso horários
+
 l = pytz.all_timezones # todos os fuso-horários
 fuso = pytz.timezone('Asia/Dubai') # fuso horário manual
 aplicado = datetime.now(fuso).strftime('%H:%M:%S') # aplica o fuso-horário
 
-from functools import *
+from functools import lru_cache
+
 @lru_cache # quando a função executar esse parâmetro denovo, guarda ele no cache
 def somas(n):
     return n+1
 
 from pathlib import Path # no linux é o caminho completo
+
 path = Path('/home/maxinne/Downloads/rasc/algo.txt') # caminho do arquivo
 leitura = path.read_text() # ler
 linhas = leitura.splitlines() # lista com o conteúdo de cada linha
@@ -642,31 +660,28 @@ path.write_text('texto') # sobrescreve o arquivo e/ou cria ele
 path.exists() # se o arquivo existe
 
 import json # com Path
+
 sample = ['texto','de','exemplo']
 path = Path('/home/maxinne/Downloads/rasc/algo.json') # json
 escritajson = json.dumps(sample,indent=4,ensure_ascii=False) # converte python pra json e formata pra suporte UNICODE
 path.write_text(escritajson) # sobrescreve json o texto convertido e/ou cria o json
 leiturajson = path.read_text() # lê o código json
 novasample = json.loads(leiturajson) # converte json pra python
-json.dump
-json.load
-json.detect_encoding
-json.encoder
-json.decoder
 
-import requests # Solicitações HTTP com json
+import requests # Solicitações HTTP
+
 url = "https://hacker-news.firebaseio.com/v0/item/31353677.json"
 r = requests.get(url) # solicitação GET HTTP
 status = r.status_code # vê status da solicitação HTTP (200 é sucesso)
 respostaJson = r.json() # pega a resposta json e transforma em dict
 
-from collections import *
+from collections import namedtuple,deque
+
 cliente = namedtuple('cliente',['Nome','Gastos']) # cria uma via de regra
 cliente1 = cliente('nometal','gastostal') 
 globals()['cliente1'] = cliente('nometal','gastostal') # cria uma tupla nessa via de regra
 cliente1._asdict() # transforma o namedtuple em dict
 cliente1 = cliente1._replace(Nome='nometal2') # substitui a namedtuple por essa nova com o valor trocado
-
 listaBase = [1,2,3,4,5]
 fila = deque(listaBase) #lista que só meche nas extremidades otimizada O(1)
 fila.append(6) # adiciona no final
@@ -676,6 +691,7 @@ fila.popleft() # remove no começo
 listaBase = list(fila) # converte queue pra lista
 
 import time
+
 time.sleep(1) # espera tantos segundos pra executar um código
 cronometro = time.time() # começa a contar o tempo a apartir daqui
 tempoFinal = time.time() # mede o tempo desde o último time.time()
@@ -700,7 +716,7 @@ r = Real().metodoabstrato() # a classe abstrata não pode ser usada aqui, só a 
 rr = Real().metodoabstrato2()
 
 import sched # agendar eventos
-import time
+
 def evento_agendado(agendador,intervalo,mensagem):
     agendador.enter( # vai chamar uma função com parâmetros a cada tantos segundos
                     intervalo, # tempo entre chamadas
@@ -711,9 +727,11 @@ def evento_agendado(agendador,intervalo,mensagem):
 agendador = sched.scheduler(time.time,time.sleep) # cria o agendador
 evento_agendado(agendador,1,'Essa mensagem é mostrada a cada 1s')
 agendador.run() # roda
+
 import smtplib # enviar e-mail
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
 email_login = "seu@gmail.com"  # Seu endereço de e-mail
 email_password = "tem16digitos"  # Senha de app (tem na conta do google)
 email_para = "emaildestino@gmail.com"
@@ -735,7 +753,9 @@ else:
     print("E-mail enviado com sucesso!")
 finally:
     server.quit() # encerra conexão
+
 import sqlite3 # banco de dados
+
 conectar = sqlite3.connect('banco.db') # criar ou conectar
 cursor = conectar.cursor()             # interagir com o banco
 cursor.execute('''CREATE TABLE IF NOT EXISTS planta (
@@ -751,14 +771,49 @@ dados_do_banco = [
 for dado in dados_do_banco:
     cursor.execute("INSERT INTO planta"
                    "(nome,price)"
-                   "VALUES (?,?)",dado) # comando sql de inserção dos dados
+                   "VALUES (?,?)",dado) # comando sql de inserção dos dados(comando,origemdosdados)
 cursor.execute('SELECT * FROM planta') # comando sql de selecionar
 linhas = cursor.fetchall() # pega todas as linhas do arquivo.db
 for linha in linhas:
     print(f"ID:{linha[0]},Nome:{linha[1]},Price:{linha[2]}")
 conectar.commit()                       # enviar
 conectar.close()                        # terminar conexão
+
+from pynput import keyboard                                 # Pega informações do teclado
+
+def pressionado(tecla): # dizer a tecla pressionada 
+    try:
+        print(tecla.char)
+    except Exception:
+        print(tecla)
+with keyboard.Listener(on_press=pressionado) as listener: # checar teclas em segundo plano
+    listener.join()
+
+from pynput.mouse import Button, Controller                 # informações e acesso ao mouse
+
+teclado = KeyBoardController()
+mouse = Controller()         # começa a monitorar o mouse
+print(mouse.position)        # diz as coordenadas do mouse
+mouse.position = (500, 500)  # modifica o lugar do mouse
+mouse.move(100, 0)           # Move 100 pixels para a direita
+mouse.move(-100,0)           # Move 100 pixels pra esquerda
+mouse.click(Button.left, 1)  # Clica 1x com o botão esquerdo
+mouse.click(Button.right,1)  # Clica 1x com o botão direito
+mouse.scroll(0, 2)           # scroll pra cima
+mouse.scroll(0, -2)          # scroll pra baixo
+mouse.scroll(2,0)            # scroll pra direita
+mouse.scroll(-2,0)           # scroll pra esquerda
+
+from pynput import keyboard                                 # Pega informações do teclado
+from pynput.keyboard import Controller as KeyBoardController,Key# acesso ao teclado
+
+keyboard = KeyBoardController() # Monitora o Teclado
+keyboard.press('a')  # Pressiona a tecla
+keyboard.release('a')  # Solta a tecla
+Key.enter # tecla enter
+
 import pygame # módulo de jogos
+
 pygame.init()                                    # inicia a janela
 window = pygame.display.set_mode((578,324),pygame.RESIZABLE) # tamanho da janela; quadrado de trocar de resolução
 pygame.display.set_caption("Nome da Janela") # nome da janela
