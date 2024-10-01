@@ -812,6 +812,18 @@ keyboard.press('a')  # Pressiona a tecla
 keyboard.release('a')  # Solta a tecla
 Key.enter # tecla enter
 
+import flask
+import django
+import sqlalchemy
+import asyncio
+import aiohttp
+import jinja2
+import pytest 
+import gunicorn
+import hashlib
+import fastapi
+import socket
+
 import pygame # módulo de jogos
 
 pygame.init()                                    # inicia a janela
