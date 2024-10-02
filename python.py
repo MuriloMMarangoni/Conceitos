@@ -854,6 +854,7 @@ rect_txt.left    # esqurda do rect
 rect_txt.right   # parte direita do rect
 rect_txt.x       # coordenada do rect na tela
 rect_txt.y       # coordenada do rect na tela
+clock = pygame.time.Clock()
 while window:                       # em loops infinitos, capture eventos e use blit e flip apenas
     for event in pygame.event.get():# checa os eventos
         if event.type == pygame.QUIT:# tipos de eventos, se clicar no X da tela
@@ -866,6 +867,9 @@ while window:                       # em loops infinitos, capture eventos e use 
         if event.type == pygame.KEYUP: # se soltar a tecla
             print(nome_das_teclas := pygame.key.name(event.key)) # diz o nome da tecla apertada
         if event.type == pygame.VIDEORESIZE: pass # se o tamanho da janela mudar
-    pygame.time.Clock().tick(60) # deixa o jogo a tantos Hz
+    clock.tick(60) # deixa o jogo a tantos Hz
+    fps = f'{clock.get_fps():.0f}' # depois do tick definido, ele diz o fps
+    teclas_pressionadas = pygame.key.get_pressed() # diz as teclas que estão sendo pressionadas
+    if teclas_pressionadas[pygame.K_0]: pass # se o 0 faz parte das teclas pressionadas
 available_fonts = pygame.font.get_fonts()         # lista de fontes disponíveis do sistema operacional
 print(available_fonts)
