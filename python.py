@@ -822,7 +822,8 @@ import pytest
 import gunicorn
 import hashlib
 import fastapi
-import socket
+import ftplib # transferência de arquivos
+import socket # conexão entre dispositivos
 
 import pygame # módulo de jogos
 
