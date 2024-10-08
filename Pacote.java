@@ -24,5 +24,12 @@ public class Pacote {
         this.valor = valor;
         this.nome = nome;
     }
+    public int pub = 1;// pode ser acessado de qualquer lugar
+    private int pri = 2;// só dentro dessa classe
+    protected int pro = 3;// só nesse pacote e subclasses 
+    //default int d = 4;// só nesse pacote
+    int teste() { // default só pode ser acessado nesse pacote
+        return pri;
+    }
 }
 

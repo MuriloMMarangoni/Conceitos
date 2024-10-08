@@ -1,7 +1,8 @@
 import java.util.ArrayList; // modern arrays
 import java.util.Collections; // ?
 import java.util.Scanner; // inputs
-
+import java.time.LocalDate; // Horário ou data
+import java.time.format.DateTimeFormatter; // formatação do tempo
 public class Java{ // main class,this class need to have the name of the file
     public static void main() { // main method, always executed
         // public; visible everywhere
@@ -72,6 +73,10 @@ public class Java{ // main class,this class need to have the name of the file
         System.out.println(list);// mostra a lista
         //Collections
         Collections.reverse(list);// inverte lista original
+        //LocalDate
+        LocalDate hoje = LocalDate.now(); // data atual
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");//dia mes ano
+        System.out.println(hoje.format(formatador)); // tempo formatado
 // --OOP------------------------------------------------
         Pacote instancia = new Pacote(); // instancia um objeto sem parâmetros
         Pacote instanciaP = new Pacote(19,"M"); // chama o construtor da classe com parâmetros

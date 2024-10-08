@@ -823,7 +823,32 @@ import gunicorn
 import hashlib
 import fastapi
 import ftplib # transferência de arquivos
-import socket # conexão entre dispositivos
+
+import socket # Módulo de conexão entre processos e dispositivos
+nome_da_maquina = socket.gethostname() # fala o nome do dispositivo
+ip = socket.gethostbyname(nome_da_maquina) # ip dessa máquina
+ip_geral = '0.0.0.0'                       # ip especial onde qualquer máquina pode conectar (servidores usam)
+porta = 12345                              # porta de acesso 
+socket_server = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # socket do servidor(ivp4,tcp)
+socket_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # deixa o servidor elegivel a ser iniciado 1s depois do encerramento
+socket_server.bind((ip,porta)) # liga o SOCKET ao IP e PORTA (mesmo pc)
+socket_server.bind((ip_geral,porta)) # (cliente de outro dispositivo)
+socket_server.listen() # faz o SOCKET permitir conexões
+info = socket_server.accept() # aceita uma conexão e diz quem conectou
+socket_client = info[0] # socket do cliente
+ip_client = info[1][0] # ip do cliente
+port_client = info[1][1] # porta do cliente
+mensagem_servidor = input("[Server] ").encode() # converte o texto pra bytes
+socket_client.send(mensagem_servidor) # envia os bytes pro cliente
+mensagem_cliente = socket_client.recv(1024).decode() # decodifica e lê o que o cliente mandou
+socket_server.close() # fecha conexão do socket
+socket_client = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # socket do cliente
+socket_client.connect((ip,porta))# busca um servidor com esse IP e PORTA
+mensagem_servidor = socket_client.recv(1024).decode() # decodifica e lê o que o servidor mandou
+print(f"[Server] {mensagem_servidor}")
+i = input("[Client] ")
+socket_client.send(i.encode()) # envia os bytes pro servidor
+socket_client.close() # fecha conexão do socket
 
 import pygame # módulo de jogos
 
