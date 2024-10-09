@@ -849,6 +849,11 @@ print(f"[Server] {mensagem_servidor}")
 i = input("[Client] ")
 socket_client.send(i.encode()) # envia os bytes pro servidor
 socket_client.close() # fecha conexão do socket
+s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) # ipv4 udp
+mensagem,endereco = s.recvfrom(1024) # mensagem em bytes e endereço
+s.sendto("enviar".encode(),(ip,port)) # envia pro endereço
+print(s.recvfrom(1024)[0].decode()) # recebe do endereço
+
 
 import pygame # módulo de jogos
 
